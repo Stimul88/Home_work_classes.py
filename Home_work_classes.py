@@ -17,6 +17,15 @@ class Student:
         else:
             return 'Ошибка'
 
+    def __str__(self):
+        for a, b in best_student.grades.items():
+            ever_grade = sum(b) / len(b)
+            return f'Студенты:\n' f'Имя: {self.name}\n'f'Фамилия: {self.surname}\n' \
+                   f'Средняя оценка за домашние задания: {ever_grade}\n' \
+                   f'Курсы в процессе изучения: {self.courses_in_progress}\n' \
+                   f'Завершенные курсы: {self.finished_courses}\n'
+
+
 
 class Mentor:
     def __init__(self, name, surname):
@@ -31,6 +40,12 @@ class Mentor:
 class Lecturer(Mentor):
     grades = {}
 
+    def __str__(self):
+        for a, b in cool_lector.grades.items():
+            ever_grade = sum(b) / len(b)
+            return f'Лекторы:\n' f'Имя: {self.name}\n'f'Фамилия: {self.surname}\n' \
+                   f'Средняя оценка за лекции {ever_grade}\n'
+
 
 class Reviewer(Mentor):
     def rate_hw(self, student, course, grade):
@@ -42,10 +57,15 @@ class Reviewer(Mentor):
         else:
             return 'Ошибка'
 
+    def __str__(self):
+        return f'Проверяющие:\n' f'Имя: {self.name}\n'f'Фамилия: {self.surname}\n'
+
 
 best_student = Student('Ruoy', 'Eman', 'your_gender')
-best_student.courses_in_progress += ['Python']
+best_student.courses_in_progress += ['Python', 'Git']
 best_student.courses_attached += ['Python']
+best_student.finished_courses += ['Введение в программирование']
+
 
 cool_mentor = Mentor('Some', 'Buddy')
 cool_mentor.courses_attached += ['Python']
@@ -57,7 +77,6 @@ cool_lector.courses_attached += ['Python']
 cool_reviewer = Reviewer('Some', 'Buddy')
 cool_reviewer.courses_attached += ['Python']
 
-
 cool_reviewer.rate_hw(best_student, 'Python', 10)
 cool_reviewer.rate_hw(best_student, 'Python', 10)
 cool_reviewer.rate_hw(best_student, 'Python', 10)
@@ -66,5 +85,9 @@ best_student.rate_1(cool_lector, 'Python', 5)
 best_student.rate_1(cool_lector, 'Python', 8)
 best_student.rate_1(cool_lector, 'Python', 7)
 
-print(best_student.grades)
-print(cool_lector.grades)
+# print(best_student.grades)
+# print(best_student.grades)
+
+print(cool_reviewer)
+print(cool_lector)
+print(best_student)
